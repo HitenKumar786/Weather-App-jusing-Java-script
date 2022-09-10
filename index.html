@@ -14,7 +14,7 @@
 <body>
     <div id="main">
         <div class="header">
-            <h1>Javascript Weather app</h1>
+            <h1>Weather app</h1>
         </div>
 
         <div class="form">
@@ -31,9 +31,17 @@
 
         </div>
         <div class="weatherCard">
-            <span id="upResult"></span>
+            <h1 id="upResult" font-size="20px"></h1>
+            <h1 id="imgResult"></h1>
+            <h1 id="weatherResult" text-size="20px"></h1>
+
+            <h3 id="thermometer"></h3>
             <h1 id="result"></h1>
             <span id="downResult"></span>
+            <br><br>
+            <span id="windResult"> </span>
+            <br><br>
+
         </div>
     </div>
     <script>
@@ -48,13 +56,37 @@
                 .then(function(response) {
                     // handle success
                     console.log(response.data);
-
+                    document.querySelector("#thermometer").innerHTML = "<img src=\'thermometer.png\' width=\'10px\' height=\'40px\'>";
                     document.querySelector("#result").innerHTML =
                         `${response.data.main.temp}°C`;
                     document.querySelector("#upResult").innerHTML =
                         response.data.name;
                     document.querySelector("#downResult").innerHTML =
                         `${response.data.main.temp_min}°C - ${response.data.main.temp_max}°C `;
+
+                    document.querySelector("#windResult").innerHTML = `Wind ${response.data.wind.speed} KM/H `
+
+
+                    if (response.data.main.temp < 0) {
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'h.png\' width=\'50px\' height=\'50px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Snow Weather";
+
+                    } else if (response.data.main.temp > 30) {
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'hot.png\' width=\'50px\' height=\'50px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Hot Weather";
+
+                    } else if (response.data.main.temp > 0 || response.data.main.temp > 20) {
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'g.png\' width=\'50px\' height=\'50px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Cold Weather";
+
+                    } else if (response.data.main.temp > 20 || response.data.main.temp > 30) {
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'i.png\' width=\'50px\' height=\'50px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Sunny Weather";
+                    } else {
+                        undefined
+                    }
+
+
                 })
                 .catch(function(error) {
                     // handle error
