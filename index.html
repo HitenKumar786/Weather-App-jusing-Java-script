@@ -14,7 +14,7 @@
 <body>
     <div id="main">
         <div class="header">
-            <h1>Weather app</h1>
+            <h1><b><u>Weather App</u></b> </h1>
         </div>
 
         <div class="form">
@@ -22,7 +22,7 @@
             <form onsubmit="submitFunction(); return false">
 
 
-                <h1>City Name:</h1> <input type="text" id="cityName" class="cityName" placeholder="Enter City Name" required>
+                <h1>City Name</h1> <input type="text" id="cityName" class="cityName" placeholder="Enter City Name" required>
                 <br>
                 <br>
                 <button class="button">Get Weather</button>
@@ -68,20 +68,20 @@
 
 
                     if (response.data.main.temp < 0) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'h.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Snow Weather";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'h.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Snow Fall Today";
 
                     } else if (response.data.main.temp > 30) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'hot.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Hot Weather";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'hot.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Hot Weather Today";
 
                     } else if (response.data.main.temp > 0 || response.data.main.temp > 20) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'g.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Cold Weather";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'g.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Cold Weather Today";
 
                     } else if (response.data.main.temp > 20 || response.data.main.temp > 30) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'i.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Sunny Weather";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'i.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#weatherResult").innerHTML = "Sunny Weather Today";
                     } else {
                         undefined
                     }

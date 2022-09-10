@@ -61,7 +61,7 @@ body {
 .weatherCard {
     align-content: center;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 100px;
     font-size: small;
 }
@@ -76,4 +76,9 @@ body {
 
 #weatherResult {
     margin-left: -50px;
+}
+
+#upResult {
+    margin-left: 200px;
+    font-size: 30px;
 }
