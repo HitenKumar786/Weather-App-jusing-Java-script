@@ -59,9 +59,7 @@ body {
 }
 
 .weatherCard {
-    align-content: center;
-    justify-content: center;
-    margin-top: 20px;
+    margin-top: -10px;
     margin-left: 100px;
     font-size: small;
 }
@@ -79,6 +77,10 @@ body {
 }
 
 #upResult {
-    margin-left: 200px;
+    margin-left: 170px;
     font-size: 30px;
+}
+
+#humidityResult {
+    margin-top: 200px;
 }

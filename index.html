@@ -34,13 +34,14 @@
             <h1 id="upResult" font-size="20px"></h1>
             <h1 id="imgResult"></h1>
             <h1 id="weatherResult" text-size="20px"></h1>
-
             <h3 id="thermometer"></h3>
             <h1 id="result"></h1>
             <span id="downResult"></span>
             <br><br>
             <span id="windResult"> </span>
-            <br><br>
+            <br>
+            <span id="humidityResult"></span>
+
 
         </div>
     </div>
@@ -65,22 +66,22 @@
                         `${response.data.main.temp_min}°C - ${response.data.main.temp_max}°C `;
 
                     document.querySelector("#windResult").innerHTML = `Wind ${response.data.wind.speed} KM/H `
-
+                    document.querySelector("#humidityResult").innerHTML = `Humidity ${response.data.main.humidity} % `
 
                     if (response.data.main.temp < 0) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'h.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'h.png\' width=\'50px\' height=\'50px\'>";
                         document.querySelector("#weatherResult").innerHTML = "Snow Fall Today";
 
                     } else if (response.data.main.temp > 30) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'hot.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'hot.png\' width=\'50px\' height=\'50px\'>";
                         document.querySelector("#weatherResult").innerHTML = "Hot Weather Today";
 
                     } else if (response.data.main.temp > 0 || response.data.main.temp > 20) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'g.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'g.png\' width=\'50px\' height=\'50px\'>";
                         document.querySelector("#weatherResult").innerHTML = "Cold Weather Today";
 
                     } else if (response.data.main.temp > 20 || response.data.main.temp > 30) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'i.png\' width=\'70px\' height=\'70px\'>";
+                        document.querySelector("#imgResult").innerHTML = "<img src=\'i.png\' width=\'50px\' height=\'50px\'>";
                         document.querySelector("#weatherResult").innerHTML = "Sunny Weather Today";
                     } else {
                         undefined
