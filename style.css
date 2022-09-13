@@ -1,6 +1,6 @@
 body {
-    background-image: url(cloudy.gif);
-    background-size: 14000px 1400px;
+    background-image: url(SKY.jpg);
+    background-size: 14000px;
     background-repeat: no-repeat;
 }
 
@@ -82,4 +82,5 @@ body {
     width: 1325px;
     border-radius: 30px;
     border: 5px solid black;
+    background: transparent;
 }
