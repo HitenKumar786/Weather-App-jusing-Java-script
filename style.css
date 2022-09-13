@@ -1,5 +1,5 @@
 body {
-    background-image: url(SKY.jpg);
+    background-image: url(cloudy.gif);
     background-size: 14000px 1400px;
     background-repeat: no-repeat;
 }
@@ -41,13 +41,25 @@ body {
     font-size: 50px;
 }
 
+#current {
+    /* background-image: url(raining.gif); */
+    size: 20px;
+}
+
 .weatherCard {
-    background-image: url(raining.gif);
-    border: 1px solid black;
-    margin-top: 30px;
+    /* background-image: url(raining.gif);
+    background-image:; */
+    border: 5px solid black;
+    margin-top: -10px;
     border-radius: 30px;
-    padding: 10px;
-    background-color: transparent;
+    height: 415px;
+}
+
+.weatherCard1 {
+    margin-top: -400px;
+    margin-left: 20px;
+    color: rgb(255, 255, 255);
+    font-size: smaller;
 }
 
 #forecast {
@@ -59,4 +71,15 @@ body {
     width: 190px;
     margin: 15px;
     padding: 50px;
+    margin-top: 50px;
+    height: 250px;
+}
+
+.weatherCard>#gifResult {
+    margin-left: -3px;
+    margin-top: -2px;
+    height: 410px;
+    width: 1325px;
+    border-radius: 30px;
+    border: 5px solid black;
 }

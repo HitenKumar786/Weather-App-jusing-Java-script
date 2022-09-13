@@ -23,12 +23,13 @@
             <button id="button">Get Weather</button>
         </form>
     </div>
+
     <div id="current"></div>
 
     <div id="forecast"> </div>
 
 
-    <span id="gifResult"></span>
+
     <script>
         // let formatedTime = moment("2022-09-12 21:00:00").format("ddd ha");
         // console.log("formatedTime: ", formatedTime);
@@ -46,12 +47,17 @@
                     document.querySelector("#current").innerHTML =
 
                         `<div class="weatherCard">
+                            <img src="" id="gifResult" />
+                            <div class="weatherCard1"> 
+                            
                         <h1 id="upResult"></h1>
-                        <h1 id="result"></h1>
+                        <h3 id ="dis"></h3> 
                         <img src="" id="icon" />
+                        <h1 id="result"></h1>
+                       
                         <br />
                         <span id="downResult"></span>
-                       
+                    </div>
                     </div>`
 
 
@@ -65,11 +71,53 @@
                     document.querySelector("#downResult").innerHTML =
                         `${response.data.main.temp_min.toFixed(0)}°C - ${response.data.main.temp_max.toFixed(0)}°C `;
 
-                    document.querySelector("#icon").src = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
+                    document.querySelector("#icon").src = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+                    document.querySelector("#dis").innerHTML = `${response.data.weather[0].description}`;
+
+                    if (response.data.weather[0].description == 'broken clouds') {
+
+                        document.querySelector("#gifResult").src = `cloudy.gif`
+
+                    } else if (response.data.weather[0].description == 'scattered clouds') {
+
+                        document.querySelector("#gifResult").src = `scattered clouds`
+
+                    } else if (response.data.weather[0].description == 'overcast clouds') {
+
+                        document.querySelector("#gifResult").src = `overcast.gif`
+
+                    } else if (response.data.weather[0].description == 'smoke') {
+
+                        document.querySelector("#gifResult").src = `smoke.gif`
+
+                    } else if (response.data.weather[0].description == 'mist') {
+
+                        document.querySelector("#gifResult").src = `mist.gif`
+
+                    } else if (response.data.weather[0].description == 'few clouds') {
+
+                        document.querySelector("#gifResult").src = `few clouds.gif`
+
+                    } else if (response.data.weather[0].description == 'clear sky') {
+
+                        document.querySelector("#gifResult").src = `clear sky.gif`
 
 
+                    } else if (response.data.weather[0].description == 'light rain') {
 
+                        document.querySelector("#gifResult").src = `light rain.gif`
 
+                    } else if (response.data.weather[0].description == 'moderate rain') {
+
+                        document.querySelector("#gifResult").src = `modrate rain.gif`
+
+                    } else if (response.data.weather[0].description == 'thunderstrom') {
+
+                        document.querySelector("#gifResult").src = `strom.gif`
+
+                    } else {
+                        undefined
+                    }
 
                 })
                 .catch(function(error) {
@@ -95,12 +143,15 @@
                                 <br/>
                                 <span>${moment(eachItem.dt_txt).format("ha")}</span>
                                 <h1 >${eachItem?.main?.temp.toFixed(0)}°C</h1>
-                                <span>${eachItem?.weather[0].description}</span>
+                             <span>${eachItem?.weather[0].description}</span>
                                 <img src="https://openweathermap.org/img/wn/${eachItem?.weather[0]?.icon}@2x.png"/>
                                 <br />
                                 <span>${eachItem.main.temp_min.toFixed(0)}°C - ${eachItem.main.temp_max.toFixed(0)}°C </span>
                                 </div>`
+
+
                     })
+
                 })
                 .catch(function(error) {
                     // handle error
