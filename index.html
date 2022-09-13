@@ -6,88 +6,101 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
-    <div id="main">
-        <div class="header">
-            <h1><b><u>Weather App</u></b> </h1>
-        </div>
 
-        <div class="form">
+    <div class="form">
+        <form onsubmit="submitFunction(); return false">
+            <h1 id="header">Javascript Weather app</h1>
 
-            <form onsubmit="submitFunction(); return false">
-
-
-                <h1>City Name</h1> <input type="text" id="cityName" class="cityName" placeholder="Enter City Name" required>
-                <br>
-                <br>
-                <button class="button">Get Weather</button>
-
-            </form>
-
-        </div>
-        <div class="weatherCard">
-            <h1 id="upResult" font-size="20px"></h1>
-            <h1 id="imgResult"></h1>
-            <h1 id="weatherResult" text-size="20px"></h1>
-            <h3 id="thermometer"></h3>
-            <h1 id="result"></h1>
-            <span id="downResult"></span>
-            <br><br>
-            <span id="windResult"> </span>
+            <br> City Name: <input type="text" id="cityName" required>
             <br>
-            <span id="humidityResult"></span>
-
-
-        </div>
+            <button id="button">Get Weather</button>
+        </form>
     </div>
+    <div id="current"></div>
+
+    <div id="forecast"> </div>
+
+
+    <span id="gifResult"></span>
     <script>
+        // let formatedTime = moment("2022-09-12 21:00:00").format("ddd ha");
+        // console.log("formatedTime: ", formatedTime);
+
+
         function submitFunction() {
             let cityName = document.querySelector("#cityName").value
 
             console.log("cityName: ", cityName);
 
-            // TODO: get weather for this city 
-
+            // get current weather 
             axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e0f99c494c2ce394a18cc2fd3f100543&units=metric`)
                 .then(function(response) {
+
+                    document.querySelector("#current").innerHTML =
+
+                        `<div class="weatherCard">
+                        <h1 id="upResult"></h1>
+                        <h1 id="result"></h1>
+                        <img src="" id="icon" />
+                        <br />
+                        <span id="downResult"></span>
+                       
+                    </div>`
+
+
                     // handle success
                     console.log(response.data);
-                    document.querySelector("#thermometer").innerHTML = "<img src=\'thermometer.png\' width=\'10px\' height=\'40px\'>";
+
                     document.querySelector("#result").innerHTML =
-                        `${response.data.main.temp}°C`;
+                        `${response.data.main.temp.toFixed(0)}°C`;
                     document.querySelector("#upResult").innerHTML =
-                        response.data.name;
+                        `${response.data.name} <br/> Now`;
                     document.querySelector("#downResult").innerHTML =
-                        `${response.data.main.temp_min}°C - ${response.data.main.temp_max}°C `;
+                        `${response.data.main.temp_min.toFixed(0)}°C - ${response.data.main.temp_max.toFixed(0)}°C `;
 
-                    document.querySelector("#windResult").innerHTML = `Wind ${response.data.wind.speed} KM/H `
-                    document.querySelector("#humidityResult").innerHTML = `Humidity ${response.data.main.humidity} % `
-
-                    if (response.data.main.temp < 0) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'h.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Snow Fall Today";
-
-                    } else if (response.data.main.temp > 30) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'hot.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Hot Weather Today";
-
-                    } else if (response.data.main.temp > 0 || response.data.main.temp > 20) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'g.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Cold Weather Today";
-
-                    } else if (response.data.main.temp > 20 || response.data.main.temp > 30) {
-                        document.querySelector("#imgResult").innerHTML = "<img src=\'i.png\' width=\'50px\' height=\'50px\'>";
-                        document.querySelector("#weatherResult").innerHTML = "Sunny Weather Today";
-                    } else {
-                        undefined
-                    }
+                    document.querySelector("#icon").src = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`
 
 
+
+
+
+                })
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+
+            // get 5 day forecast
+            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=e0f99c494c2ce394a18cc2fd3f100543&units=metric`)
+                .then(function(response) {
+
+
+                    console.log("forecast: ", response.data);
+
+                    let forecastDiv = document.querySelector("#forecast");
+                    forecastDiv.innerHTML = ""
+
+                    response.data.list.map(eachItem => {
+
+                        forecastDiv.innerHTML +=
+                            `<div class="weatherCard">
+                                <span>${moment(eachItem.dt_txt).format("ddd D/M")}</span>
+                                <br/>
+                                <span>${moment(eachItem.dt_txt).format("ha")}</span>
+                                <h1 >${eachItem?.main?.temp.toFixed(0)}°C</h1>
+                                <span>${eachItem?.weather[0].description}</span>
+                                <img src="https://openweathermap.org/img/wn/${eachItem?.weather[0]?.icon}@2x.png"/>
+                                <br />
+                                <span>${eachItem.main.temp_min.toFixed(0)}°C - ${eachItem.main.temp_max.toFixed(0)}°C </span>
+                                </div>`
+                    })
                 })
                 .catch(function(error) {
                     // handle error

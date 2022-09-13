@@ -1,86 +1,62 @@
 body {
-    background-image: url("b.jpg");
-    background-size: 1400px 660px;
+    background-image: url(SKY.jpg);
+    background-size: 14000px 1400px;
     background-repeat: no-repeat;
-}
-
-#main {
-    border-radius: 25px 75px;
-    border: 2px solid white;
-    padding: 20px;
-    width: 700px;
-    height: 600px;
-    margin-left: 320px;
-    background-color: rgba(0, 0, 0, .5);
-    color: #fff;
-}
-
-.header {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-wrap: wrap;
 }
 
 .form {
     display: flex;
-    align-content: center;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
 }
 
-.cityName {
+#cityName {
     background: transparent;
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
     border-radius: 25px;
-    border: 2px solid white;
+    border: 2px solid black;
     padding: 20px;
     width: 400px;
     height: 10px;
-    color: aliceblue;
+    color: black;
 }
 
-.button {
+#button {
     background: transparent;
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
     border-radius: 25px;
-    border: 2px solid white;
+    border: 2px solid black;
+    margin-bottom: 20px;
     padding: 20px;
     width: 130px;
     height: 50px;
     margin-left: 150px;
-    color: aliceblue;
-}
-
-.weatherCard {
-    margin-top: -10px;
-    margin-left: 100px;
-    font-size: small;
-}
-
-#thermometer {
-    margin-left: -30px;
+    color: black;
 }
 
 #result {
-    margin-top: -50px;
+    font-size: 50px;
 }
 
-#weatherResult {
-    margin-left: -50px;
+.weatherCard {
+    background-image: url(raining.gif);
+    border: 1px solid black;
+    margin-top: 30px;
+    border-radius: 30px;
+    padding: 10px;
+    background-color: transparent;
 }
 
-#upResult {
-    margin-left: 170px;
-    font-size: 30px;
+#forecast {
+    display: flex;
 }
 
-#humidityResult {
-    margin-top: 200px;
+#forecast>div {
+    size: -20px;
+    width: 190px;
+    margin: 15px;
+    padding: 50px;
 }
