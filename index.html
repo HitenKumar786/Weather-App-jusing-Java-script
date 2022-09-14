@@ -25,9 +25,9 @@
     </div>
 
     <div id="current"></div>
-
-    <div id="forecast"> </div>
-
+    <div id="mainForecast">
+        <div id="forecast"> </div>
+    </div>
 
 
     <script>
@@ -80,7 +80,7 @@
 
                     } else if (response.data.weather[0].description == 'scattered clouds') {
 
-                        document.querySelector("#gifResult").src = `scattered clouds`
+                        document.querySelector("#gifResult").src = `scattered clouds.gif`
 
                     } else if (response.data.weather[0].description == 'overcast clouds') {
 
@@ -96,11 +96,16 @@
 
                     } else if (response.data.weather[0].description == 'few clouds') {
 
-                        document.querySelector("#gifResult").src = `few clouds.gif`
+                        document.querySelector("#gifResult").src = `few clouds2.gif`
 
                     } else if (response.data.weather[0].description == 'clear sky') {
 
-                        document.querySelector("#gifResult").src = `clear sky.gif`
+                        document.querySelector("#gifResult").src = `clearsky1.gif`
+
+
+                    } else if (response.data.weather[0].description == 'haze') {
+
+                        document.querySelector("#gifResult").src = `haze.gif`
 
 
                     } else if (response.data.weather[0].description == 'light rain') {
@@ -132,24 +137,29 @@
 
                     console.log("forecast: ", response.data);
 
+
                     let forecastDiv = document.querySelector("#forecast");
                     forecastDiv.innerHTML = ""
 
+
                     response.data.list.map(eachItem => {
 
+
                         forecastDiv.innerHTML +=
+
                             `<div class="weatherCard">
                                 <span>${moment(eachItem.dt_txt).format("ddd D/M")}</span>
                                 <br/>
                                 <span>${moment(eachItem.dt_txt).format("ha")}</span>
                                 <h1 >${eachItem?.main?.temp.toFixed(0)}°C</h1>
-                             <span>${eachItem?.weather[0].description}</span>
-                                <img src="https://openweathermap.org/img/wn/${eachItem?.weather[0]?.icon}@2x.png"/>
+                                
+                                <span>${eachItem?.weather[0].description}</span>
+
+                             <img src="https://openweathermap.org/img/wn/${eachItem?.weather[0]?.icon}@2x.png"/>
                                 <br />
                                 <span>${eachItem.main.temp_min.toFixed(0)}°C - ${eachItem.main.temp_max.toFixed(0)}°C </span>
-                                </div>`
-
-
+                            
+                            </div>`
                     })
 
                 })
